@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>captcha</title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+	    $('#btn_recargar').click(function(){
+	        document.location.reload();
+	        return false;
+	    });
+
+	    $('#send').click(function(e){
+	        e.preventDefault();
+	        var data = $('#form_fleet').serialize();
+	        $('#form_fleet').submit();
+	        console.log(data);
+	        $.ajax({
+	            url : "validar_captcha.php",
+	            type : "post",
+	            data : data,
+	            success: function(res) {
+	                // body...
+	            }
+	        });
+	    });
+	});
+</script>
+</head>
+<body>
+	<form id="form_fleet">
+		<td>
+            <table> 
+                <tr> 
+                    <td><img src="captcha.php"/></td> <td><button id="btn_recargar">Recargar</button></td><br>
+                </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name="captcha" required >
+                        </td>
+                    </tr>
+                </tr> 
+            </table>
+            <tr style="height:20px;">
+                <td colspan="2" align="center"><input class="btn btn-dark btn-xs" value="Continuar" type="button" id='send' /></td>
+            </tr>
+	    </td>
+	</form>
+</body>
+
+</html>
